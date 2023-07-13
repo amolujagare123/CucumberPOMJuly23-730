@@ -28,4 +28,18 @@ public class LoginSD {
         Assert.assertEquals("This is not a correct page",
                 url,getDriver().getCurrentUrl());
     }
+
+    @When("I click on forgot password link")
+    public void iClickOnForgotPasswordLink() {
+        login.clickForgotPassword();
+    }
+
+    @Then("I should reach to the forgot password page")
+    public void iShouldReachToTheForgotPasswordPage() {
+
+        String expected = "POSNIC - Store Logo";
+        String actual = getDriver().getTitle();
+        Assert.assertEquals("this is not a forgot password page",
+                expected,actual);
+    }
 }

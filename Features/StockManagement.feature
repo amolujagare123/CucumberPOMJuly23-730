@@ -25,5 +25,6 @@ Feature: all stock management scenarios
     When I do login operation
     And I click on add customer link
     And I enter below data to add customer
-      | Swapnali | my address | 66767676 | 8988989 |
+      | Monali | my address | 66767676 | 8988989 |
+    And I click on add button
     Then user should be added
