@@ -3,6 +3,7 @@ package stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.sl.In;
 import org.junit.Assert;
 import pages.SearchResult;
 
@@ -51,5 +52,30 @@ public class BookingsSD {
         }
 
         Assert.assertTrue(hotelName+":this hotel is not in the search result",flag);
+    }
+
+    @Then("I verify system displays all hotels within {string} amount")
+    public void iVerifySystemDisplaysAllHotelsWithinAmount(String priceStr) {
+
+        ArrayList<Integer> priceList = searchResult.getPriceList();
+        System.out.println(priceList);
+
+        int expectedPrice = Integer.parseInt(priceStr);
+
+        ArrayList<Integer> greaterPriceList = new ArrayList<>();
+
+        boolean flag = true;
+        for (int price : priceList)
+        {
+            if (price>expectedPrice)
+            {
+                flag = false;
+                greaterPriceList.add(price);
+            }
+        }
+
+        Assert.assertTrue("Some prices are greater than "+expectedPrice
+                +"\nbelow are greater prices\n"+greaterPriceList
+                ,flag);
     }
 }

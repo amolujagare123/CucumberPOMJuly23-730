@@ -45,4 +45,31 @@ public class SearchResult extends Base {
     {
         return getElementTextList(hotels);
     }
+
+
+    By priceListRaw = By.xpath("//span[@data-testid='price-and-discounted-price']");
+
+    public ArrayList<Integer> getPriceList()
+    {
+        ArrayList<String> rawPriceList = getElementTextList(priceListRaw);
+        ArrayList<Integer> priceList = new ArrayList<>();
+        for (String priceStr:rawPriceList) // ₹ 10,500
+        {
+            String temp1 = priceStr.split(" ")[1]; // 10,500
+            String temp2 = temp1.replace(",", ""); // 10500
+            int price = 0;
+            try {
+                 price = Integer.parseInt(temp2);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            priceList.add(price);
+        }
+
+        return priceList;
+    }
+
 }
